@@ -8,4 +8,4 @@ I'm following this playlist https://www.youtube.com/playlist?list=PLZQftyCk7_Sdo
 
 **Parser**: creates a _syntax tree_ of the program from the tokens created by the Lexer.
 
-![syntax tree](./syntax-tree.png "Syntax Tree")
+![syntax tree](https://github.com/albertomosconi/icsdi/blob/master/syntax-tree.png "Syntax Tree")
