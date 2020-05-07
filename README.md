@@ -2,6 +2,10 @@
 
 I'm following this playlist https://www.youtube.com/playlist?list=PLZQftyCk7_SdoVexSmwy_tBgs7P0b97yD
 
-## Steps in developing a programming language
+## Building blocks of a programming language
 
 **Lexer**: it goes through the input and divides it into a list of _tokens_. A token in an object characterized by a type and optionally a value.
+
+**Parser**: creates a _syntax tree_ of the program from the tokens created by the Lexer.
+
+![syntax tree](./syntax-tree.png "Syntax Tree")
