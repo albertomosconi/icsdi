@@ -25,3 +25,12 @@ class BinOpNode:
     def __repr__(self):
         'display node'
         return f'({self.left_node}, {self.op_token}, {self.right_node})'
+
+
+class UnaryOpNode:
+    def __init__(self, op_token, node):
+        self.op_token = op_token
+        self.node = node
+
+    def __repr__(self):
+        return f'({self.op_token}, {self.node})'

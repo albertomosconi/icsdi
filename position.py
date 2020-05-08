@@ -3,7 +3,7 @@
 ########################
 
 
-class Postition:
+class Position:
     'object that holds the current position in the file: index, line and column'
 
     def __init__(self, idx, ln, col, fn, ftxt):
@@ -13,7 +13,7 @@ class Postition:
         self.fn = fn  # file name
         self.ftxt = ftxt  # file content
 
-    def advance(self, current_char):
+    def advance(self, current_char=None):
         'moves forward of one character'
         self.idx += 1
         self.col += 1
@@ -26,4 +26,4 @@ class Postition:
 
     def copy(self):
         'return a copy of the position object'
-        return Postition(self.idx, self.ln, self.col, self.fn, self.ftxt)
+        return Position(self.idx, self.ln, self.col, self.fn, self.ftxt)

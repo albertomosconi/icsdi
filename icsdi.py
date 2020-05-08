@@ -1,5 +1,5 @@
 from lexer import Lexer
-from parsericsdi import Parser
+from parser_icsdi import Parser
 
 ########################
 # RUN
@@ -17,4 +17,4 @@ def run(fn, text):
     parser = Parser(tokens)
     ast = parser.parse()
 
-    return ast, None
+    return ast.node, ast.error

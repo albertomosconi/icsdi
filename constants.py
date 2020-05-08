@@ -17,3 +17,6 @@ TT_DIV = 'DIV'
 'parenthesis'
 TT_LPAREN = 'LPAREN'
 TT_RPAREN = 'RPAREN'
+
+'end of file'
+TT_EOF = 'EOF'
