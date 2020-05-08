@@ -1,32 +1,11 @@
 from constants import DIGITS, TT_INT, TT_FLOAT, TT_PLUS, TT_MINUS, TT_MUL, TT_DIV, TT_LPAREN, TT_RPAREN, TT_EOF
 from nodes import NumberNode, BinOpNode, UnaryOpNode
 from errors import InvalidSyntaxError
+from results import ParseResult
 
 ########################
 # PARSER
 ########################
-
-
-class ParseResult:
-    def __init__(self):
-        self.error = None
-        self.node = None
-
-    def register(self, res):
-        if isinstance(res, ParseResult):
-            if res.error:
-                self.error = res.error
-            return res.node
-
-        return res
-
-    def success(self, node):
-        self.node = node
-        return self
-
-    def failure(self, error):
-        self.error = error
-        return self
 
 
 class Parser:
