@@ -1,4 +1,4 @@
-from constants import DIGITS, TT_INT, TT_FLOAT, TT_PLUS, TT_MINUS, TT_MUL, TT_DIV, TT_LPAREN, TT_RPAREN, TT_EOF
+from constants import DIGITS, TT_INT, TT_FLOAT, TT_PLUS, TT_MINUS, TT_MUL, TT_DIV, TT_POW, TT_LPAREN, TT_RPAREN, TT_EOF
 from nodes import NumberNode, BinOpNode, UnaryOpNode
 from errors import InvalidSyntaxError
 from results import ParseResult
@@ -29,21 +29,11 @@ class Parser:
             ))
         return res
 
-    def factor(self):
-        'returns NumberNode if the current token is an INT or FLOAT'
+    def atom(self):
         res = ParseResult()
         tok = self.current_token
 
-        if tok.type in (TT_PLUS, TT_MINUS):
-            res.register(self.advance())
-            factor = res.register(self.factor())
-
-            if res.error:
-                return res
-
-            return res.success(UnaryOpNode(tok, factor))
-
-        elif tok.type in (TT_INT, TT_FLOAT):
+        if tok.type in (TT_INT, TT_FLOAT):
             res.register(self.advance())
             return res.success(NumberNode(tok))
 
@@ -63,7 +53,29 @@ class Parser:
                     "Expected ')'"
                 ))
 
-        return res.failure(InvalidSyntaxError(tok.pos_start, tok.pos_end, "Expected INT or FLOAT"))
+        return res.failure(InvalidSyntaxError(
+            tok.pos_start, tok.pos_end,
+            "Expected INT, FLOAT, '+', '-' or '('"
+        ))
+
+    def power(self):
+        return self.binary_operation(self.atom, (TT_POW, ), self.factor)
+
+    def factor(self):
+        'returns NumberNode if the current token is an INT or FLOAT'
+        res = ParseResult()
+        tok = self.current_token
+
+        if tok.type in (TT_PLUS, TT_MINUS):
+            res.register(self.advance())
+            factor = res.register(self.factor())
+
+            if res.error:
+                return res
+
+            return res.success(UnaryOpNode(tok, factor))
+
+        return self.power()
 
     def term(self):
         'evaluates term'
@@ -73,10 +85,13 @@ class Parser:
         'evaluates expression'
         return self.binary_operation(self.term, (TT_PLUS, TT_MINUS))
 
-    def binary_operation(self, func, ops):
+    def binary_operation(self, func_a, ops, func_b=None):
         'returns BinOpNode for allowed operators (ops) using "func" to get the left and right nodes'
+        if func_b == None:
+            func_b = func_a
+
         res = ParseResult()
-        left = res.register(func())
+        left = res.register(func_a())
 
         if res.error:
             return res
@@ -84,7 +99,7 @@ class Parser:
         while self.current_token.type in ops:
             op_token = self.current_token
             res.register(self.advance())
-            right = res.register(func())
+            right = res.register(func_b())
             if res.error:
                 return res
             left = BinOpNode(left, op_token, right)

@@ -13,6 +13,7 @@ TT_PLUS = 'PLUS'
 TT_MINUS = 'MINUS'
 TT_MUL = 'MUL'
 TT_DIV = 'DIV'
+TT_POW = 'POW'
 
 'parenthesis'
 TT_LPAREN = 'LPAREN'

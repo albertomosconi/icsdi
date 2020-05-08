@@ -1,5 +1,5 @@
 from values import Number
-from constants import TT_PLUS, TT_MINUS, TT_MUL, TT_DIV
+from constants import TT_PLUS, TT_MINUS, TT_MUL, TT_DIV, TT_POW
 from results import RTResult
 
 
@@ -41,6 +41,9 @@ class Interpreter:
 
         elif node.op_token.type == TT_DIV:
             result, error = left.dived_by(right)
+
+        elif node.op_token.type == TT_POW:
+            result, error = left.powed_by(right)
 
         if error:
             return res.failure(error)
