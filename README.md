@@ -1,6 +1,6 @@
 # ICSDI - my personal programming language
 
-I'm following this playlist https://www.youtube.com/playlist?list=PLZQftyCk7_SdoVexSmwy_tBgs7P0b97yD
+I'm following [this playlist](https://www.youtube.com/playlist?list=PLZQftyCk7_SdoVexSmwy_tBgs7P0b97yD "Make your OWN programming language") by [CodePulse](https://www.youtube.com/channel/UCUVahoidFA7F3Asfvamrm7w "CodePulse")
 
 ## Building blocks of a programming language
 
